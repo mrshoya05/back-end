@@ -1,24 +1,16 @@
 require('dotenv').config()
 const express = require('express')
-const app = express()
-const port = 3000
+const { resolve } = require('path');
+
+const app = express();
+const port = 3010;
+
+app.use(express.static('static'));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.sendFile(resolve(__dirname, 'pages/index.html'));
+});
 
-app.get('/twitter', (req, res)=>{
-    res.send('you are log in twitter')
-})
-
-app.get('/shoya', (req, res)=>{
-    res.send('<h1> shoya uh are doing best ! </h1>')
-})
-
-app.get('/mono', (req, res)=>{
-    res.send("momo is woorking....")
-})
-
-app.listen(process.env.PORT, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
